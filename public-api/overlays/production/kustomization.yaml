@@ -8,33 +8,33 @@ commonLabels:
   team: devops
 
 commonAnnotations:
-  note: "This is an PRODUCTION deployment"
+  note: This is an PRODUCTION deployment
 
 resources:
-  - ns.yaml
-  - ../../base
+- ns.yaml
+- ../../base
 
-patches:
 
  # yaml file
- -  target:
-      name: public-api
-      kind: Deployment
-    path: deploy-patch.yaml
- -  target:
-      name: cm-private-api
-    path:  cm-patch.yaml
- -  target:
-      name: public-api
-      kind: Ingress
-    path:  ingress-patch.yaml
- -  target:
-      name: svc-public-api
-      kind: Service
-    path: svc-patch.yaml
+patches:
+- path: deploy-patch.yaml
+  target:
+    kind: Deployment
+    name: public-api
+- path: cm-patch.yaml
+  target:
+    name: cm-private-api
+- path: ingress-patch.yaml
+  target:
+    kind: Ingress
+    name: public-api
+- path: svc-patch.yaml
+  target:
+    kind: Service
+    name: svc-public-api
 
 
 images:
-  - name: KUSTOMIZE-DEFINED
-    newName: geraldbar/kubelabs_publicapi2
-    newTag: 1.0.0
+- name: KUSTOMIZE-DEFINED
+  newName: geraldbar/kubelabs_publicapi2
+  newTag: 2.0.0
